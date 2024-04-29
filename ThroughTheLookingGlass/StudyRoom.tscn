@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://ct2btlm8ohbic"]
+[gd_scene load_steps=22 format=3 uid="uid://ct2btlm8ohbic"]
 
 [ext_resource type="Script" path="res://StudyRoom.gd" id="1_7astx"]
 [ext_resource type="Texture2D" uid="uid://blmf6wia7m2l7" path="res://Tileset/mp_house_interiors_tileset_pack/tilemap_all.png" id="1_jh5l3"]
 [ext_resource type="Texture2D" uid="uid://bsmm4mncsx1ug" path="res://Tileset/mp_house_interiors_tileset_pack/office.png" id="2_se0x2"]
 [ext_resource type="Texture2D" uid="uid://cn0e0oqcobxj1" path="res://Tileset/tileset all.png" id="3_g30jd"]
 [ext_resource type="PackedScene" uid="uid://b67l60ug1ue47" path="res://player.tscn" id="4_02xld"]
+[ext_resource type="Script" path="res://StudyRoom-ChildRoom.gd" id="6_re2j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5c4f"]
 texture = ExtResource("1_jh5l3")
@@ -14929,6 +14930,9 @@ texture = ExtResource("3_g30jd")
 [sub_resource type="TileSet" id="TileSet_8pxk0"]
 sources/0 = SubResource("TileSetAtlasSource_bpf1x")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agb8w"]
+size = Vector2(23, 44)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7astx")
 
@@ -14969,3 +14973,13 @@ layer_0/tile_data = PackedInt32Array(393224, 589824, 53, 458760, 589824, 54, 393
 
 [node name="Player" parent="." instance=ExtResource("4_02xld")]
 position = Vector2(32, 112)
+
+[node name="StudyRoom-ChildRoom" type="Area2D" parent="."]
+script = ExtResource("6_re2j1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StudyRoom-ChildRoom"]
+position = Vector2(33, 106)
+shape = SubResource("RectangleShape2D_agb8w")
+
+[connection signal="body_entered" from="StudyRoom-ChildRoom" to="StudyRoom-ChildRoom" method="_on_body_entered"]
+[connection signal="body_exited" from="StudyRoom-ChildRoom" to="StudyRoom-ChildRoom" method="_on_body_exited"]

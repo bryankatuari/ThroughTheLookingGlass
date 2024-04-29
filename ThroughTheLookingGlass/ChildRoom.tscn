@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dxd6x0stkoaah"]
+[gd_scene load_steps=12 format=3 uid="uid://dxd6x0stkoaah"]
 
 [ext_resource type="Texture2D" uid="uid://blmf6wia7m2l7" path="res://Tileset/mp_house_interiors_tileset_pack/tilemap_all.png" id="1_07lys"]
 [ext_resource type="Script" path="res://ChildRoom-LivingRoom.gd" id="2_bjtva"]
 [ext_resource type="PackedScene" uid="uid://b67l60ug1ue47" path="res://player.tscn" id="3_bikr8"]
+[ext_resource type="Script" path="res://ChildRoom-StudyRoom.gd" id="4_iwk42"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ouls0"]
 texture = ExtResource("1_07lys")
@@ -5971,7 +5972,16 @@ position = Vector2(31, 107)
 shape = SubResource("RectangleShape2D_0fpo4")
 
 [node name="Player" parent="." instance=ExtResource("3_bikr8")]
-position = Vector2(351, 112)
+position = Vector2(32, 110)
+
+[node name="ChildRoom-StudyRoom" type="Area2D" parent="."]
+script = ExtResource("4_iwk42")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChildRoom-StudyRoom"]
+position = Vector2(352, 107)
+shape = SubResource("RectangleShape2D_0fpo4")
 
 [connection signal="body_entered" from="ChildRoom-LivingRoom" to="ChildRoom-LivingRoom" method="_on_body_entered"]
 [connection signal="body_exited" from="ChildRoom-LivingRoom" to="ChildRoom-LivingRoom" method="_on_body_exited"]
+[connection signal="body_entered" from="ChildRoom-StudyRoom" to="ChildRoom-StudyRoom" method="_on_body_entered"]
+[connection signal="body_exited" from="ChildRoom-StudyRoom" to="ChildRoom-StudyRoom" method="_on_body_exited"]
